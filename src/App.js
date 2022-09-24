@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { db } from './firebase.init';
 import { useEffect } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai'
@@ -17,6 +17,10 @@ function App() {
     const text = addField.current.value;
     await addDoc(techlistRef, { name: text });
     addField.current.value = ''
+  }
+  const handleDelete = async (id) => {
+    const techDoc = doc(db, "techlist", id);
+    await deleteDoc(techDoc)
   }
 
   useEffect(() => {
@@ -37,7 +41,7 @@ function App() {
               <div className='flex items-center gap-6 '>
                 <button><AiFillCaretUp className='text-blue-900' /></button>
                 <button><AiFillCaretDown className='text-blue-900' /></button>
-                <button><p className='text-red-500 font-bold'>X</p></button>
+                <button onClick={() => handleDelete(tech.id)}><p className='text-red-500 font-bold'>X</p></button>
               </div>
             </div>
           </div>
