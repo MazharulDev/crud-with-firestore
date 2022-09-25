@@ -34,7 +34,7 @@ function App() {
   return (
     <div>
       {
-        techlist.map(tech => <div key={tech.id}>
+        techlist.length ? (techlist.map(tech => <div key={tech.id}>
           <div className='flex justify-center'>
             <div className='w-1/4 py-3 px-4 rounded-lg bg-blue-200 mt-3 flex justify-between items-center'>
               <h2 className='text-2xl'>{tech.name}</h2>
@@ -45,12 +45,16 @@ function App() {
               </div>
             </div>
           </div>
-        </div>)
+        </div>)) : <div className='flex justify-center'>
+          <div className='w-1/4 py-3 px-4 rounded-lg bg-blue-200 mt-3 flex justify-between items-center font-bold text-red-600'>
+            <p>No Data Found</p>
+          </div>
+        </div>
       }
       <div className=' flex justify-center mt-3'>
         <div className='w-1/4'>
           <form className='bg-blue-200 py-2 px-4 rounded-lg flex justify-between' onSubmit={handleSubmit}>
-            <input className='p-2 border rounded-lg w-full border-blue-900' type="text" name="tect" ref={addField} />
+            <input className='p-2 border-2 rounded-md w-full border-blue-900' type="text" name="tect" ref={addField} />
             <input className='py-2 px-4 bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition-all cursor-pointer ml-3' type="submit" value="Add" />
           </form>
         </div>
